@@ -1,0 +1,38 @@
+name = "Appworld Green Agent"
+description = '''
+Made by Nordic Bears. You are the green agent in AppWorld implementation.
+Your role is to evaluate white agents' abilities to complete the AppWorld tasks.
+'''
+version = "0.1.0"
+
+defaultInputModes = ["text"]
+defaultOutputModes = ["text"]
+[capabilities]
+streaming = false
+
+[[skills]]
+id = "appworld_task_completion_evaluator"
+name = "AppWorld Task Completion Evaluator"
+description = """
+Evaluate whether an AppWorld task is completed by comparing the task's success criteria against provided task definition, user/agent actions, and environment state or event trace. Returns a structured result a numeric score (0.0–1.0).
+"""
+tags = ["appworld", "evaluation", "task", "completion", "a2a"]
+examples = ["""
+Your task is to instantiate tau-bench to test the agent located at:
+<white_agent_url>
+http://localhost:9002/
+</white_agent_url>
+You should use the following env configuration:
+<env_config>
+{
+  "env": "retail",
+  "user_strategy": "llm",
+  "user_model": "openai/gpt-4o",
+  "user_provider": "openai",
+  "task_split": "test",
+  "task_ids": [
+    "82e2fac_1"
+  ]
+}
+</env_config>
+"""]
