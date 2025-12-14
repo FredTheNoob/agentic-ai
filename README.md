@@ -19,8 +19,9 @@ uv sync
 
 ```bash
 git lfs install
-uv pip install git+https://github.com/stonybrooknlp/appworld.git
-appworld install
+git clone https://github.com/StonyBrookNLP/appworld; cd appworld
+uv pip install -e .
+appworld install --repo
 appworld download data
 ```
 
