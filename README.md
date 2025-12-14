@@ -22,6 +22,7 @@ git lfs install  # needed anytime you use git as some files are tracked in Git L
 git clone https://github.com/StonyBrookNLP/appworld; cd appworld  # clone the repo
 pip install -e .  # installs package in a local editable mode in ./src/
 appworld install --repo  # unpacks encrypted code in the current directory
+appworld download data
 ```
 
 Verify AppWorld installation
