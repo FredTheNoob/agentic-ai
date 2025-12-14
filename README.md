@@ -1,6 +1,6 @@
-# Agentify Example: Appworld
+# Agentify Example: AppWorld
 
-Example code for agentifying Tau-Bench using A2A and MCP standards.
+Example code for agentifying AppWorld using A2A and MCP standards.
 
 ## Project Structure
 
@@ -15,6 +15,19 @@ src/
 
 ```bash
 uv sync
+```
+
+```bash
+git lfs install  # needed anytime you use git as some files are tracked in Git LFS
+pip install git+https://github.com/stonybrooknlp/appworld.git  # installs package in your site-packages directory
+appworld install  # unpacks encrypted code in your site-packages directory
+appworld download data
+```
+
+Verify AppWorld installation
+```bash
+appworld verify tests
+appworld verify tasks
 ```
 
 ## Usage
