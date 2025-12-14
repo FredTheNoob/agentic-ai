@@ -1,4 +1,4 @@
-# Agentify Example: Tau-Bench
+# Agentify Example: Appworld
 
 Example code for agentifying Tau-Bench using A2A and MCP standards.
 
