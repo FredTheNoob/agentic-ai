@@ -200,7 +200,7 @@ class AppWorldGreenAgentExecutor(AgentExecutor):
     ) -> None:
         print("starting execution")
         user_input = context.get_user_input()
-        print(user_input)
+        print("HELLO ", user_input)
 
         tags = parse_tags(user_input)
         url = tags["white_agent_url"]
@@ -212,7 +212,7 @@ class AppWorldGreenAgentExecutor(AgentExecutor):
             task_ids = env_config["task_ids"]
 
         if "env_config" not in tags or len(task_ids) == 0:
-            task_ids = ["82e2fac_1", "50e1ac9_1", "fac291d_2"]
+            task_ids = ["82e2fac_1"]
         
         weighted_sum = 0
         total_weight = 0

@@ -44,6 +44,7 @@ class GeneralWhiteAgentExecutor(AgentExecutor):
     async def execute(self, context: RequestContext, event_queue: EventQueue) -> None:
         # parse the task
         user_input = context.get_user_input()
+        print("WHITE ", user_input)
         if context.context_id not in self.ctx_id_to_messages:
             self.ctx_id_to_messages[context.context_id] = []
         messages = self.ctx_id_to_messages[context.context_id]
@@ -63,11 +64,11 @@ class GeneralWhiteAgentExecutor(AgentExecutor):
         else:
             response = completion(
                 messages=messages,
-                model="openai/gpt-4o",
-                custom_llm_provider="openai",
+                model="openrouter/mistralai/devstral-2512:free",
                 temperature=0.0,
             )
         next_message = response.choices[0].message.model_dump()  # type: ignore
+        print("WHITE RES ", next_message)
         messages.append(
             {
                 "role": "assistant",
