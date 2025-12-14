@@ -14,10 +14,6 @@ src/
 ## Installation
 
 ```bash
-uv sync
-```
-
-```bash
 git lfs install
 git clone https://github.com/StonyBrookNLP/appworld; cd appworld
 uv pip install -e .
@@ -29,6 +25,10 @@ Verify AppWorld installation
 ```bash
 appworld verify tests
 appworld verify tasks
+```
+
+```bash
+uv sync
 ```
 
 ## Usage
