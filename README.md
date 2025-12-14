@@ -19,9 +19,9 @@ uv sync
 
 ```bash
 git lfs install  # needed anytime you use git as some files are tracked in Git LFS
-pip install git+https://github.com/stonybrooknlp/appworld.git  # installs package in your site-packages directory
-appworld install  # unpacks encrypted code in your site-packages directory
-appworld download data
+git clone https://github.com/StonyBrookNLP/appworld; cd appworld  # clone the repo
+pip install -e .  # installs package in a local editable mode in ./src/
+appworld install --repo  # unpacks encrypted code in the current directory
 ```
 
 Verify AppWorld installation
