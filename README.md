@@ -18,10 +18,10 @@ uv sync
 ```
 
 ```bash
-git lfs install  # needed anytime you use git as some files are tracked in Git LFS
-git clone https://github.com/StonyBrookNLP/appworld; cd appworld  # clone the repo
-pip install -e .  # installs package in a local editable mode in ./src/
-appworld install --repo  # unpacks encrypted code in the current directory
+git lfs install
+git clone https://github.com/StonyBrookNLP/appworld; cd appworld
+uv pip install -e .
+appworld install --repo
 appworld download data
 ```
 
@@ -33,7 +33,13 @@ appworld verify tasks
 
 ## Usage
 
-First, configure `.env` with `OPENAI_API_KEY=...`, then
+First, configure `.env` with `OPENAI_API_KEY=...` and setup your domain, then
+
+```bash
+HTTPS_ENABLED=true CLOUDRUN_HOST=YOUR_DOMAIN ROLE=AGENT_ROLE PORT=xxxx agentbeats run_ctrl # Replace "YOUR_DOMAIN and "AGENT_ROLE" and "xxxx"
+```
+
+For local evaluation
 
 ```bash
 # Launch complete evaluation
