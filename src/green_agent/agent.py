@@ -17,10 +17,6 @@ from a2a.types import AgentCard, SendMessageSuccessResponse, Message
 from a2a.utils import new_agent_text_message, get_text_parts
 from src.my_util import parse_tags, my_a2a
 
-# from tau_bench.agents.tool_calling_agent import ToolCallingAgent
-from tau_bench.envs import get_env
-from tau_bench.types import SolveResult, RESPOND_ACTION_NAME, Action
-
 dotenv.load_dotenv()
 
 
@@ -198,9 +194,9 @@ class AppWorldGreenAgentExecutor(AgentExecutor):
         context: RequestContext,
         event_queue: EventQueue
     ) -> None:
+        self.history = []
         print("starting execution")
         user_input = context.get_user_input()
-        print("HELLO ", user_input)
 
         tags = parse_tags(user_input)
         url = tags["white_agent_url"]
@@ -312,7 +308,6 @@ class AppWorldGreenAgentExecutor(AgentExecutor):
 
         white_agent_response = await my_a2a.send_message(url, history_str, context_id=context_id)
         res_root = white_agent_response.root
-        print("RES ROOT ", res_root)
         assert isinstance(res_root, SendMessageSuccessResponse)
         res_result = res_root.result
         assert isinstance(
