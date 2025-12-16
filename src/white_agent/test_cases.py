@@ -1,3 +1,16 @@
+"""White agent implementation - the target agent being tested."""
+
+from time import sleep
+import uvicorn
+import dotenv
+from a2a.server.apps import A2AStarletteApplication
+from a2a.server.request_handlers import DefaultRequestHandler
+from a2a.server.agent_execution import AgentExecutor, RequestContext
+from a2a.server.events import EventQueue
+from a2a.server.tasks import InMemoryTaskStore
+from a2a.types import AgentSkill, AgentCard, AgentCapabilities
+from a2a.utils import new_agent_text_message
+from litellm import completion
 
 # solution_code_body = """
 # # get spotify access token for main_user using apis.spotify.access_token_from.
@@ -235,3 +248,69 @@ apis.supervisor.complete_task(status="fail")
 """
 ]
 ]
+
+dotenv.load_dotenv()
+
+
+def prepare_white_agent_card(url):
+    skill = AgentSkill(
+        id="task_fulfillment",
+        name="Task Fulfillment",
+        description="Handles user requests and completes tasks",
+        tags=["general"],
+        examples=[],
+    )
+    card = AgentCard(
+        name="file_agent",
+        description="Test agent from file",
+        url=url,
+        version="1.0.0",
+        default_input_modes=["text/plain"],
+        default_output_modes=["text/plain"],
+        capabilities=AgentCapabilities(),
+        skills=[skill],
+    )
+    return card
+
+
+class GeneralWhiteAgentExecutor(AgentExecutor):
+    def __init__(self):
+        self.ctx_id_to_messages = {}
+        self.message_id = 0
+
+    async def execute(self, context: RequestContext, event_queue: EventQueue) -> None:
+        if context.context_id not in self.ctx_id_to_messages:
+            self.ctx_id_to_messages[context.context_id] = []
+            self.message_id = 0
+
+        await event_queue.enqueue_event(
+            new_agent_text_message(
+                solution_code_bodies[int(context.context_id)][self.message_id], context_id=context.context_id
+            )
+        )
+        self.message_id += 1
+        
+    async def cancel(self, context, event_queue) -> None:
+        raise NotImplementedError
+
+
+def start_test_white_agent(agent_name="general_white_agent", host="localhost", port=9002):
+    print("Starting white agent...")
+    url = f"http://{host}:{port}"
+    card = prepare_white_agent_card(url)
+
+    request_handler = DefaultRequestHandler(
+        agent_executor=GeneralWhiteAgentExecutor(),
+        task_store=InMemoryTaskStore(),
+    )
+
+    app = A2AStarletteApplication(
+        agent_card=card,
+        http_handler=request_handler,
+    )
+
+    uvicorn.run(app.build(), host=host, port=port)
+
+
+if __name__ == "__main__":
+    start_test_white_agent()

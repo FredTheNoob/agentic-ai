@@ -89,11 +89,12 @@ class GeneralWhiteAgentExecutor(AgentExecutor):
 def start_white_agent(agent_name="general_white_agent", host="localhost", port=9002):
     print("Starting white agent...")
 
-    # # without controller
-    url = f"http://{host}:{port}"
-    card = prepare_white_agent_card(url)
-
-    # card = prepare_white_agent_card(os.getenv("AGENT_URL"))
+    if os.environ.get("AGENT_URL") is None:
+        # # without controller
+        url = f"http://{host}:{port}"
+        card = prepare_white_agent_card(url)
+    else:
+        card = prepare_white_agent_card(os.getenv("AGENT_URL"))
 
     request_handler = DefaultRequestHandler(
         agent_executor=GeneralWhiteAgentExecutor(),

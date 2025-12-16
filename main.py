@@ -5,7 +5,7 @@ import asyncio
 
 from src.green_agent import start_green_agent
 from src.white_agent import start_white_agent
-from src.launcher import launch_evaluation, launch_remote_evaluation
+from src.launcher import launch_evaluation, launch_remote_evaluation, launch_test_cases_evaluation
 from pydantic_settings import BaseSettings
 
 
@@ -52,6 +52,11 @@ def launch():
 def launch_remote(green_url: str, white_url: str):
     """Launch the complete evaluation workflow."""
     asyncio.run(launch_remote_evaluation(green_url, white_url))
+
+@app.command()
+def launch_test_cases():
+    """Run the test cases for AppWorld."""
+    asyncio.run(launch_test_cases_evaluation())
 
 
 if __name__ == "__main__":

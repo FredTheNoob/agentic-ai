@@ -48,3 +48,10 @@ For local evaluation
 # Launch complete evaluation
 uv run python main.py launch
 ```
+
+## Tests
+To run green agent test cases
+
+```bash
+uv run python main.py launch-test-cases
+```

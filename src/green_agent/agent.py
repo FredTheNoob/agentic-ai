@@ -336,11 +336,12 @@ def start_green_agent(agent_name="appworld_green_agent", host="localhost", port=
     print("Starting green agent...")
     agent_card_dict = load_agent_card_toml(agent_name)
 
-    # # without controller
-    # url = f"http://{host}:{port}"
-    # agent_card_dict["url"] = url  # complete all required card fields
-
-    agent_card_dict["url"] = os.getenv("AGENT_URL")
+    if os.environ.get("AGENT_URL") is None:
+        # # without controller
+        url = f"http://{host}:{port}"
+        agent_card_dict["url"] = url
+    else:
+        agent_card_dict["url"] = os.getenv("AGENT_URL")
 
     request_handler = DefaultRequestHandler(
         agent_executor=AppWorldGreenAgentExecutor(),
