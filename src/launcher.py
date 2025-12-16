@@ -46,7 +46,7 @@ async def launch_evaluation():
         "user_model": "openrouter/openai/gpt-4o",
         "user_provider": "litellm_proxy",
         "task_split": "test",
-        "task_ids": ["50e1ac9_1"],
+        "task_ids": ["82e2fac_1"], # "82e2fac_1", "50e1ac9_1", "fac291d_2"
     }
     task_text = f"""
 Your task is to instantiate tau-bench to test the agent located at:

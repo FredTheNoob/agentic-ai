@@ -307,6 +307,7 @@ class AppWorldGreenAgentExecutor(AgentExecutor):
         # print("\n\n" + "%" * 20 + " GREEN AGENT SENT " + "%" * 20 + "\n" + history_str)
 
         white_agent_response = await my_a2a.send_message(url, history_str, context_id=context_id)
+        print("WHITE RS", white_agent_response)
         res_root = white_agent_response.root
         assert isinstance(res_root, SendMessageSuccessResponse)
         res_result = res_root.result

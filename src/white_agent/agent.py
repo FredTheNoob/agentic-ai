@@ -64,7 +64,8 @@ class GeneralWhiteAgentExecutor(AgentExecutor):
         else:
             response = completion(
                 messages=messages,
-                model="openrouter/kwaipilot/kat-coder-pro:free",
+                # model="openrouter/kwaipilot/kat-coder-pro:free",
+                model="openrouter/mistralai/devstral-2512:free",
                 temperature=0.0,
             )
         next_message = response.choices[0].message.model_dump()  # type: ignore
@@ -88,11 +89,11 @@ class GeneralWhiteAgentExecutor(AgentExecutor):
 def start_white_agent(agent_name="general_white_agent", host="localhost", port=9002):
     print("Starting white agent...")
 
-    # # # without controller
-    # url = f"http://{host}:{port}"
-    # card = prepare_white_agent_card(url)
+    # # without controller
+    url = f"http://{host}:{port}"
+    card = prepare_white_agent_card(url)
 
-    card = prepare_white_agent_card(os.getenv("AGENT_URL"))
+    # card = prepare_white_agent_card(os.getenv("AGENT_URL"))
 
     request_handler = DefaultRequestHandler(
         agent_executor=GeneralWhiteAgentExecutor(),
