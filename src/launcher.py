@@ -13,7 +13,7 @@ async def launch_evaluation():
     green_address = ("localhost", 9001)
     green_url = f"http://{green_address[0]}:{green_address[1]}"
     p_green = multiprocessing.Process(
-        target=start_green_agent, args=("tau_green_agent", *green_address)
+        target=start_green_agent, args=("appworld_green_agent", *green_address)
     )
     p_green.start()
     assert await my_a2a.wait_agent_ready(green_url), "Green agent not ready in time"
@@ -46,7 +46,7 @@ async def launch_evaluation():
         "user_model": "openrouter/openai/gpt-4o",
         "user_provider": "litellm_proxy",
         "task_split": "test",
-        "task_ids": [1],
+        "task_ids": ["50e1ac9_1"],
     }
     task_text = f"""
 Your task is to instantiate tau-bench to test the agent located at:
@@ -80,10 +80,10 @@ async def launch_remote_evaluation(green_url: str, white_url: str):
         "user_model": "openrouter/openai/gpt-4o",
         "user_provider": "litellm_proxy",
         "task_split": "test",
-        "task_ids": [1],
+        "task_ids": ["50e1ac9_1"], # "82e2fac_1", "50e1ac9_1", "fac291d_2"
     }
     task_text = f"""
-Your task is to instantiate tau-bench to test the agent located at:
+Your task is to instantiate AppWorld to test the agent located at:
 <white_agent_url>
 {white_url}
 </white_agent_url>

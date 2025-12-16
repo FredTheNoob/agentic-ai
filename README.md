@@ -33,7 +33,7 @@ appworld verify tasks
 
 ## Usage
 
-First, configure `.env` with `OPENAI_API_KEY=...` and setup your domain, then
+First, configure `.env` with `OPENROUTER_API_KEY=...` and setup your domain, then
 
 ```bash
 HTTPS_ENABLED=true CLOUDRUN_HOST=YOUR_DOMAIN ROLE=AGENT_ROLE PORT=xxxx agentbeats run_ctrl # Replace "YOUR_DOMAIN and "AGENT_ROLE" and "xxxx"

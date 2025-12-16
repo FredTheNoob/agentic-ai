@@ -208,7 +208,7 @@ class AppWorldGreenAgentExecutor(AgentExecutor):
             task_ids = env_config["task_ids"]
 
         if "env_config" not in tags or len(task_ids) == 0:
-            task_ids = ["82e2fac_1"]
+            task_ids = ["50e1ac9_1"] # "82e2fac_1", "50e1ac9_1", "fac291d_2"
         
         weighted_sum = 0
         total_weight = 0
