@@ -2,6 +2,9 @@
 
 Example code for agentifying AppWorld using A2A and MCP standards.
 
+## AppWorld Documentation
+The documentation for AppWorld can be found here: https://github.com/StonyBrookNLP/appworld.
+
 ## Project Structure
 
 ```
