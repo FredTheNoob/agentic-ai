@@ -20,13 +20,13 @@ def prepare_white_agent_card(url):
     skill = AgentSkill(
         id="task_fulfillment",
         name="Task Fulfillment",
-        description="Handles user requests and completes tasks",
-        tags=["general"],
+        description="Handles user requests and completes AppWorld tasks",
+        tags=["appworld"],
         examples=[],
     )
     card = AgentCard(
-        name="general_white_agent",
-        description="A general-purpose white agent for task fulfillment.",
+        name="appworld_white_agent",
+        description="A white agent for AppWorld task fulfillment.",
         url=url,
         version="1.0.0",
         default_input_modes=["text/plain"],
@@ -44,7 +44,7 @@ class GeneralWhiteAgentExecutor(AgentExecutor):
     async def execute(self, context: RequestContext, event_queue: EventQueue) -> None:
         # parse the task
         user_input = context.get_user_input()
-        print("WHITE ", user_input)
+        print("USER INPUT ", user_input)
         if context.context_id not in self.ctx_id_to_messages:
             self.ctx_id_to_messages[context.context_id] = []
         messages = self.ctx_id_to_messages[context.context_id]
@@ -64,11 +64,11 @@ class GeneralWhiteAgentExecutor(AgentExecutor):
         else:
             response = completion(
                 messages=messages,
-                model="openrouter/mistralai/devstral-2512:free",
+                model="openrouter/kwaipilot/kat-coder-pro:free",
                 temperature=0.0,
             )
         next_message = response.choices[0].message.model_dump()  # type: ignore
-        print("WHITE RES ", next_message)
+        print("NEXT MESSAGE ", next_message)
         messages.append(
             {
                 "role": "assistant",

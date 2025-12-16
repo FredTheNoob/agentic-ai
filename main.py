@@ -1,4 +1,4 @@
-"""CLI entry point for agentify-example-tau-bench."""
+"""CLI entry point for agentify-appworld."""
 
 import typer
 import asyncio
@@ -15,7 +15,7 @@ class TaubenchSettings(BaseSettings):
     agent_port: int = 9000
 
 
-app = typer.Typer(help="Agentified Tau-Bench - Standardized agent assessment framework")
+app = typer.Typer(help="Agentified Appworld - Standardized agent assessment framework")
 
 
 @app.command()
