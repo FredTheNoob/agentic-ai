@@ -29,6 +29,7 @@ appworld download data
 ```
 
 Verify AppWorld installation
+
 ```bash
 appworld verify tests
 appworld verify tasks
@@ -42,6 +43,9 @@ First, configure `.env` with `OPENROUTER_API_KEY=...` and setup your domain, the
 HTTPS_ENABLED=true CLOUDRUN_HOST=YOUR_DOMAIN ROLE=AGENT_ROLE PORT=xxxx agentbeats run_ctrl # Replace "YOUR_DOMAIN and "AGENT_ROLE" and "xxxx"
 ```
 
+> [!CAUTION]
+> Do not run both the white agent and green agent from the same working directory
+
 For local evaluation
 
 ```bash
@@ -49,7 +53,14 @@ For local evaluation
 uv run python main.py launch
 ```
 
+For remote evaluation, host the GREEN_URL and WHITE_URL publicly, then
+
+```bash
+uv run python main.py launch-remote GREEN_URL WHITE_URL
+```
+
 ## Tests
+
 To run green agent test cases
 
 ```bash
